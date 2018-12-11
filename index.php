@@ -1,6 +1,6 @@
 <?php 
 	session_start();
- 
+ 	include 'koneksi.php';
 	// cek apakah yang mengakses halaman ini sudah login
 	if($_SESSION['level']==""){
 		header("location:login.php");
@@ -23,7 +23,7 @@
 							<img class="nav-user-photo" src="assets/avatars/user.jpg" />
 							<span class="user-info">
 								<small>Welcome,</small>
-								<?php echo $_SESSION['username']; ?>
+								<?php echo $_SESSION['nama']; ?>
 							</span>
 
 							<i class="icon-caret-down"></i>
@@ -58,90 +58,14 @@
 			<span class="menu-text"></span>
 		</a>
 
-		<div class="sidebar" id="sidebar">
-			<ul class="nav nav-list">
-				<li class="active">
-					<a href="index.php">
-						<i class="icon-dashboard"></i>
-						<span class="menu-text"> Dashboard </span>
-					</a>
-				</li><!--Dashboard-->
-				<?php 
-					if($_SESSION['level'] == '1'){
-				?>
-					<li>
-						<a href="index.php?page=1">
-							<i class="icon-bookmark"></i>
-							<span class="menu-text"> Data BPK </span>
-						</a>
-					</li><!--Data BPK-->
-					<li>
-						<a href="#" class="dropdown-toggle">
-							<i class="icon-bar-chart"></i>
-							<span class="menu-text"> Report BPK </span>
-
-							<b class="arrow icon-angle-down"></b>
-						</a><!--Report BPK-->
-
-						<ul class="submenu">
-							<li>
-								<a href="index.php?page=2">
-									<i class="icon-double-angle-right"></i>
-									Overview
-								</a>
-							</li><!--Reject-->
-
-							<li>
-								<a href="#">
-									<i class="icon-double-angle-right"></i>
-									Approve
-								</a>
-							</li><!--Approve-->
-						</ul>
-					</li><!--Report BPK-->
-				<?php
-					}else if($_SESSION['level'] == '2'){
-				?>
-				<li>
-					<a href="#" class="dropdown-toggle">
-						<i class="icon-bar-chart"></i>
-						<span class="menu-text"> Report BPK </span>
-
-						<b class="arrow icon-angle-down"></b>
-					</a><!--Report BPK-->
-
-					<ul class="submenu">
-						<li>
-							<a href="index.php?page=2">
-								<i class="icon-double-angle-right"></i>
-								Overview
-							</a>
-						</li><!--Reject-->
-
-						<li>
-							<a href="#">
-								<i class="icon-double-angle-right"></i>
-								Approve
-							</a>
-						</li><!--Approve-->
-					</ul>
-				</li><!--Report BPK-->
-				<?php 
-					}
-				?>
-			</ul><!--/.nav-list-->
-
-			<div class="sidebar-collapse" id="sidebar-collapse">
-				<i class="icon-double-angle-left"></i>
-			</div>
-		</div>
+		<?php include 'template/sidebar.php'; ?>
 
 		<div class="main-content">
 			<div class="breadcrumbs" id="breadcrumbs">
 				<ul class="breadcrumb">
 					<li>
 						<i class="icon-home home-icon"></i>
-						<a href="index.php">Home</a>
+						<a href="index.php?page=home">Home</a>
 
 						<span class="divider">
 							<i class="icon-angle-right arrow-icon"></i>
@@ -149,10 +73,28 @@
 					</li>
 					<?php
 						if(isset($_GET['page'])){
-							if($_GET['page'] == '1'){
+							if($_GET['page'] == 'create'){
+								echo "<li>
+										<a href='#' onclick='history.go(-1)'>Data BPK</a>
+
+										<span class='divider'>
+											<i class='icon-angle-right arrow-icon'></i>
+										</span>
+									</li>";
+								echo "<li class='active'>Create BPK</li>";
+							}else if($_GET['page'] == 'view'){
 								echo "<li class='active'>Data BPK</li>";
-							}else if($_GET['page'] == '2'){
-								echo "<li class='active'>Report BPK</li>";
+							}else if($_GET['page'] == 'report'){
+								echo "<li class='active'>Data BPK</li>";
+							}else if($_GET['page'] == 'detail'){
+								echo "<li>
+										<a href='#' onclick='history.go(-1)'>Data BPK</a>
+
+										<span class='divider'>
+											<i class='icon-angle-right arrow-icon'></i>
+										</span>
+									</li>
+									<li class='active'>Detail BPK</li>";
 							}else{
 								echo "<li class='active'>Dashboard</li>";
 							}
@@ -182,10 +124,10 @@
 						<h1>
 							<?php
 								if(isset($_GET['page'])){
-									if($_GET['page'] == '1'){
+									if($_GET['page'] == 'view'){
 										echo "Data BPK";
-									}else if($_GET['page'] == '2'){
-										echo "Report BPK";
+									}else if($_GET['page'] == 'create' || $_GET['page'] == 'report' || $_GET['page'] == 'detail'){
+										echo "Data BPK";
 									}else{
 										echo "Dashboard";
 									}
@@ -193,7 +135,19 @@
 							?>
 							<small>
 								<i class="icon-double-angle-right"></i>
-								overview
+								<?php
+									if(isset($_GET['page'])){
+										if($_GET['page'] == 'view'){
+											echo "Overview";
+										}else if($_GET['page'] == 'create'){
+											echo "Create BPK";
+										}else if($_GET['page'] == 'report'){
+											echo "Overview";
+										}else{
+											echo "Overview";
+										}
+									}
+								?>
 							</small>
 						</h1>
 					</div><!--/.page-header-->
@@ -203,9 +157,9 @@
 							<!--PAGE CONTENT BEGINS-->
 
 							<div class="alert alert-block alert-success">
-								<!--<button type="button" class="close" data-dismiss="alert">
+								<button type="button" class="close" data-dismiss="alert">
 									<i class="icon-remove"></i>
-								</button>-->
+								</button>
 
 								<i class="icon-ok green"></i>
 
@@ -221,39 +175,48 @@
 
 							<?php
 								if(isset($_GET['page'])){
-									if($_GET['page'] == '1'){
+									if($_GET['page'] == 'create'){
 										include 'page/bpk.php';
-									}else if($_GET['page'] == '2'){
+									}else if($_GET['page'] == 'view'){
+										include 'page/bpk.php';
+									}else if($_GET['page'] == 'report' || $_GET['page'] == 'detail'){
 										include 'page/report.php';
-									}else{
-										echo "kosong";
 									}
 								}
 							?>
 
 							<div class="space-6"></div>
+							
+							<?php 
+								if(isset($_GET['page'])){
+									if($_GET['page'] == 'home'){
+							?>
+								<div class="row-fluid">
+									<div align="right">
+										<address class="pull-right">
+											<strong>PT. Aneka Mitra Gemilang</strong>
 
-							<div class="row-fluid">
-								<div align="right">
-									<address class="pull-right">
-										<strong>PT. Aneka Mitra Gemilang</strong>
+											<br />
+											Jl. Kaliabang Bungur KM 27
+											<br />
+											Pejuang, Medan Satria, Bekasi - 17131
+											<br />
+											<abbr title="Phone">P:</abbr>
+											(021) 295-66700<br />
+											<abbr title="Fax">F:</abbr>
+											(021) 295-66782
+										</address>
+									</div>
+								</div><!--/row-->
+							<?php }} ?>
 
-										<br />
-										Jl. Kaliabang Bungur KM 27
-										<br />
-										Pejuang, Medan Satria, Bekasi - 17131
-										<br />
-										<abbr title="Phone">P:</abbr>
-										(021) 295-66700<br />
-										<abbr title="Fax">F:</abbr>
-										(021) 295-66782
-									</address>
-								</div>
-							</div><!--/row-->
 							<!--PAGE CONTENT ENDS-->
 						</div><!--/.span-->
 					</div><!--/.row-fluid-->
 				</div><!--/.page-content-->
 		</div><!--/.main-content-->
 	</div><!--/.main-container-->
-<?php include 'template/footer.php'; ?>
+<?php 
+	include 'template/modal.php'; 
+	include 'template/footer.php'; 
+?>

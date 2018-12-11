@@ -1,9 +1,9 @@
 		
 	<!--basic scripts-->
 
-	<!--[if !IE]>-->
+	<!--[if !IE]>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<!--<![endif]-->
+	<![endif]-->
 
 	<!--[if !IE]>-->
 	<script type="text/javascript">
@@ -17,16 +17,44 @@
 	<script src="assets/js/bootstrap.min.js"></script>
 
 	<!--page specific plugin scripts-->
-
+    <script type="text/javascript" src="assets/js/inlinetable/jquery.fulltable.js"></script>
 	<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+    
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/jquery.dataTables.bootstrap.js"></script>
 
 	<!--ace scripts-->
-
 	<script src="assets/js/ace-elements.min.js"></script>
 	<script src="assets/js/ace.min.js"></script>
 
 	<!--inline scripts related to this page-->
+    <?php 
+        if(isset($_GET['page'])){
+            if($_GET['page'] == 'create'){
+                include 'add_bpk.php';
+            }
+        }
+    ?>
 	<script>
+        $(document).ready(function() {
+            $('#modal-glaccount').dataTable({
+                "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+                "iDisplayLength": 5
+            })
+            $('#modal-costcenter').dataTable({
+                "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+                "iDisplayLength": 5
+            })
+            $('#modal-viewbpk').dataTable({
+                "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+                "iDisplayLength": 5
+            })
+            $('#modal-reportbpk').dataTable({
+                "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+                "iDisplayLength": 5
+            })
+        } );
+
         function show_box(id) {
             $('.widget-box.visible').removeClass('visible');
             $('#'+id).addClass('visible');
@@ -63,6 +91,5 @@
         setInterval(showTime, 500);
         // ========================Akhir Jam========================================== /
     </script>
-	
 	</body>
 </html>

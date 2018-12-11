@@ -11,7 +11,7 @@ $password = md5($_POST['password']);
  
  
 // menyeleksi data user dengan username dan password yang sesuai
-$login = mysqli_query($koneksi,"select * from pegawai where peg_user='$username' and peg_pass='$password'");
+$login = mysqli_query($koneksi,"SELECT * FROM pegawai INNER JOIN dept ON pegawai.dept_id = dept.dept_id where peg_user='$username' and peg_pass='$password'");
 // menghitung jumlah data yang ditemukan
 $cek = mysqli_num_rows($login);
 
@@ -28,6 +28,7 @@ if($cek > 0){
 		$_SESSION['nama'] = $data['peg_nama'];
 		$_SESSION['level'] = "1";
 		$_SESSION['header'] = "Dashboard";
+		$_SESSION['dept_name'] = $data['dept_nama'];
 		// alihkan ke halaman dashboard admin
 		header("location:index.php?page=home");
  
@@ -38,6 +39,7 @@ if($cek > 0){
 		$_SESSION['nama'] = $data['peg_nama'];
 		$_SESSION['level'] = "2";
 		$_SESSION['header'] = "Dashboard";
+		$_SESSION['dept_name'] = $data['dept_nama'];
 		// alihkan ke halaman dashboard pegawai
 		header("location:index.php?page=home");
  
@@ -48,6 +50,7 @@ if($cek > 0){
 		$_SESSION['nama'] = $data['peg_nama'];
 		$_SESSION['level'] = "3";
 		$_SESSION['header'] = "Dashboard";
+		$_SESSION['dept_name'] = $data['dept_nama'];
 		// alihkan ke halaman dashboard user
 		header("location:index.php?page=home");
  

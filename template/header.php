@@ -5,6 +5,7 @@
 		<meta charset="utf-8" />
 		<title>
 			<?php 
+				date_default_timezone_set("Asia/Jakarta");
 				if(isset($_SESSION['header'])){
 					if($_SESSION['header'] == ''){
 						echo "Login Page";
