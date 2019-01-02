@@ -16,12 +16,18 @@
 				</a>
 			</li><!--Data BPK-->
 			<li>
+				<a href="index.php?page=search">
+					<i class="icon-search"></i>
+					<span class="menu-text"> Search BPK </span>
+				</a>
+			</li><!--Data BPK-->
+			<!--<li>
 				<a href="#" class="dropdown-toggle">
 					<i class="icon-bar-chart"></i>
 					<span class="menu-text"> Report BPK </span>
 
 					<b class="arrow icon-angle-down"></b>
-				</a><!--Report BPK-->
+				</a>
 
 				<ul class="submenu">
 					<li>
@@ -29,16 +35,16 @@
 							<i class="icon-double-angle-right"></i>
 							Overview
 						</a>
-					</li><!--Reject-->
+					</li>
 
 					<li>
 						<a href="#">
 							<i class="icon-double-angle-right"></i>
 							Approve
 						</a>
-					</li><!--Approve-->
+					</li>
 				</ul>
-			</li><!--Report BPK-->
+			</li>Report BPK-->
 		<?php
 			}else if($_SESSION['level'] == '2'){
 		?>

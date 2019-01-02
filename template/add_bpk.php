@@ -37,17 +37,18 @@ $(document).ready(function(){
     });
   
     $.ajax({
-      url:"insert.php",
+      url:"inc/insert.php",
       method:"POST",
       data:{item_gl:item_gl, item_desc:item_desc, item_kredit:item_kredit, item_cost:item_cost},
       success:function(data){
-      alert(data);
-      $("td[contentEditable='true']").text("");
-      for(var i=2; i<= count; i++)
-      {
-       $('tr#'+i+'').remove();
-      }
-      fetch_item_data();
+        alert(data);
+        $("td[contentEditable='true']").text("");
+        for(var i=2; i<= count; i++)
+        {
+          $('tr#'+i+'').remove();
+        }
+          //fetch_item_data();
+          window.location.href = "http://example.com/new_url";
       }
     });
   });

@@ -20,7 +20,7 @@
 				<ul class="nav ace-nav pull-right">
 					<li class="light-blue">
 						<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-							<img class="nav-user-photo" src="assets/avatars/user.jpg" />
+							<img class="nav-user-photo" src="assets/avatars/user.png" />
 							<span class="user-info">
 								<small>Welcome,</small>
 								<?php echo $_SESSION['nama']; ?>
@@ -72,8 +72,13 @@
 						</span>
 					</li>
 					<?php
+						function rupiah($angka){
+							$hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+							return $hasil_rupiah;
+						}
+						
 						if(isset($_GET['page'])){
-							if($_GET['page'] == 'create'){
+							if($_GET['page'] == 'create' || $_GET['page'] == 'createDebit' || $_GET['page'] == 'search'){
 								echo "<li>
 										<a href='#' onclick='history.go(-1)'>Data BPK</a>
 
@@ -81,7 +86,15 @@
 											<i class='icon-angle-right arrow-icon'></i>
 										</span>
 									</li>";
-								echo "<li class='active'>Create BPK</li>";
+									if(isset($_GET['no'])){
+										if($_GET['no']>0){
+											echo "<li class='active'>View BPK</li>";
+										}
+									}else if($_GET['page'] == 'search'){
+										echo "<li class='active'>Search BPK</li>";
+									}else{
+										echo "<li class='active'>Create BPK</li>";
+									}
 							}else if($_GET['page'] == 'view'){
 								echo "<li class='active'>Data BPK</li>";
 							}else if($_GET['page'] == 'report'){
@@ -126,8 +139,10 @@
 								if(isset($_GET['page'])){
 									if($_GET['page'] == 'view'){
 										echo "Data BPK";
-									}else if($_GET['page'] == 'create' || $_GET['page'] == 'report' || $_GET['page'] == 'detail'){
+									}else if($_GET['page'] == 'create' || $_GET['page'] == 'report' || $_GET['page'] == 'detail' || $_GET['page'] == 'createDebit'){
 										echo "Data BPK";
+									}else if($_GET['page'] == 'search'){
+										echo "Search BPK";
 									}else{
 										echo "Dashboard";
 									}
@@ -139,8 +154,14 @@
 									if(isset($_GET['page'])){
 										if($_GET['page'] == 'view'){
 											echo "Overview";
-										}else if($_GET['page'] == 'create'){
-											echo "Create BPK";
+										}else if($_GET['page'] == 'create' || $_GET['page'] == 'createDebit'){
+											if(isset($_GET['no'])){
+												if($_GET['no']>0){
+													echo "Overview";
+												}
+											}else{
+												echo "Create BPK";
+											}
 										}else if($_GET['page'] == 'report'){
 											echo "Overview";
 										}else{
@@ -162,7 +183,6 @@
 								</button>
 
 								<i class="icon-ok green"></i>
-
 								Welcome <?php echo $_SESSION['nama']; ?> to
 								<strong class="green">
 									Aplikasi Kas Kecil
@@ -175,7 +195,7 @@
 
 							<?php
 								if(isset($_GET['page'])){
-									if($_GET['page'] == 'create'){
+									if($_GET['page'] == 'create' || $_GET['page'] == 'createDebit' || $_GET['page'] == 'search'){
 										include 'page/bpk.php';
 									}else if($_GET['page'] == 'view'){
 										include 'page/bpk.php';

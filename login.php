@@ -65,6 +65,22 @@
 																	<br />
 																</div>
 																";
+															}else if($_GET['pesan']=="duh"){
+																echo "
+																<div class='alert alert-error'>
+																	<button type='button' class='close' data-dismiss='alert'>
+																		<i class='icon-remove'></i>
+																	</button>
+
+																	<strong>
+																		<i class='icon-ok'></i>
+																		Eitss !!
+																	</strong>
+
+																	Login dulu ya Bapak & Ibu.
+																	<br />
+																</div>
+																";
 															}
 														}
 													?>

@@ -17,8 +17,9 @@
 	<script src="assets/js/bootstrap.min.js"></script>
 
 	<!--page specific plugin scripts-->
-    <script type="text/javascript" src="assets/js/inlinetable/jquery.fulltable.js"></script>
+    <!--<script type="text/javascript" src="assets/js/inlinetable/jquery.fulltable.js"></script>-->
 	<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="assets/js/date-time/bootstrap-datepicker.min.js"></script>
     
     <script src="assets/js/jquery.dataTables.min.js"></script>
     <script src="assets/js/jquery.dataTables.bootstrap.js"></script>
@@ -29,14 +30,20 @@
 
 	<!--inline scripts related to this page-->
     <?php 
-        if(isset($_GET['page'])){
+        /*if(isset($_GET['page'])){
             if($_GET['page'] == 'create'){
                 include 'add_bpk.php';
+            }else{
+                include 'add_bpkdebit.php';
             }
-        }
+        }*/
     ?>
 	<script>
         $(document).ready(function() {
+            $('.date-picker').datepicker().next().on(ace.click_event, function(){
+                $(this).prev().focus();
+            });
+
             $('#modal-glaccount').dataTable({
                 "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
                 "iDisplayLength": 5
@@ -46,6 +53,10 @@
                 "iDisplayLength": 5
             })
             $('#modal-viewbpk').dataTable({
+                "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+                "iDisplayLength": 5
+            })
+            $('#modal-searchbpk').dataTable({
                 "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
                 "iDisplayLength": 5
             })
@@ -91,5 +102,6 @@
         setInterval(showTime, 500);
         // ========================Akhir Jam========================================== /
     </script>
+
 	</body>
 </html>

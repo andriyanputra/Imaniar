@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
 	<head>
 		<meta charset="utf-8" />
 		<title>
@@ -27,6 +26,7 @@
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 		<link rel="shortcut icon" type="image/png" href="assets/images/ico.png"/>
 		<!--page specific plugin styles-->
+		<link rel="stylesheet" href="assets/css/datepicker.css" />
 
 		<!--fonts-->
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />

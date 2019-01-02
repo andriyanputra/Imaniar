@@ -10,13 +10,11 @@
 		<div class="row-fluid">
 			<table id="modal-glaccount" class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
 				<thead>
-				
-							<tr>
-								<th>No</th>
-								<th>Description</th>
-								<th>GL Account</th>
-							</tr>
-				
+					<tr>
+						<th>No</th>
+						<th>Description</th>
+						<th>GL Account</th>
+					</tr>
 				</thead>
 
 				<tbody>
@@ -63,13 +61,11 @@
 		<div class="row-fluid">
 			<table id="modal-costcenter" class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
 				<thead>
-				
-							<tr>
-								<th>No</th>
-								<th>Description</th>
-								<th>Cost Center</th>
-							</tr>
-				
+					<tr>
+						<th>No</th>
+						<th>Description</th>
+						<th>Cost Center</th>
+					</tr>
 				</thead>
 
 				<tbody>
@@ -116,7 +112,7 @@
 		<div class="space-6"></div>
 		<div class="row-fluid">
 			<div class="span3 offset3">
-				<a href="">	
+				<a href="index.php?page=createDebit">	
 					<button type="button" class="btn btn-primary btn-small pull-left">
 			  			<i class="icon-plus"></i> Create Debit
 			  		</button>
@@ -139,4 +135,34 @@
 			Close
 		</button>
 	</div>
-</div><!--COST CENTER-->		
+</div><!--Create BPK-->
+
+<div id="modal-approve" class="modal hide fade" tabindex="-1">
+	<div class="modal-header no-padding">
+		<div class="table-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			Approve BPK
+		</div>
+	</div>
+
+	<div class="modal-body no-padding">
+		<div class="space-6"></div>
+		<div class="row-fluid">
+			<form class="form-horizontal" />
+				<div class="control-group">
+					<div class="controls">
+						<input class="input-medium" type="text" id="form-note" name="bpk_note" required value="" placeholder="Tinggalkan notes" />
+					</div>
+				</div><!--Kas Notes-->
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<button class="btn btn-small btn-success pull-right">
+			<i class="icon-ok bigger-110"></i>
+			Submit
+		</button>
+	</div>
+
+		</form>
+</div><!--Create BPK-->
